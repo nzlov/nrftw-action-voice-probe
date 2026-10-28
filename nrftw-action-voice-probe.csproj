@@ -1,0 +1,63 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>nrftw_action_voice_probe</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <GameDir Condition="'$(GameDir)' == ''">/home/nzlov/.steam/steam/steamapps/common/NoRestForTheWicked</GameDir>
+    <MelonLoaderDir>$(GameDir)/MelonLoader</MelonLoaderDir>
+    <Il2CppAssembliesDir>$(MelonLoaderDir)/Il2CppAssemblies</Il2CppAssembliesDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="bindings.ini" LogicalName="Nrftw.ActionVoiceProbe.bindings.ini" />
+    <Reference Include="MelonLoader">
+      <HintPath>$(MelonLoaderDir)/net6/MelonLoader.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="0Harmony">
+      <HintPath>$(MelonLoaderDir)/net6/0Harmony.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Il2CppInterop.Runtime">
+      <HintPath>$(MelonLoaderDir)/net6/Il2CppInterop.Runtime.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Il2Cppmscorlib">
+      <HintPath>$(Il2CppAssembliesDir)/Il2Cppmscorlib.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Il2CppSystem">
+      <HintPath>$(Il2CppAssembliesDir)/Il2CppSystem.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(Il2CppAssembliesDir)/UnityEngine.CoreModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Il2CppQuantum.Engine">
+      <HintPath>$(Il2CppAssembliesDir)/Il2CppQuantum.Engine.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Il2CppQuantum.Deterministic">
+      <HintPath>$(Il2CppAssembliesDir)/Il2CppQuantum.Deterministic.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Il2Cppmoon.quantum.forsaken">
+      <HintPath>$(Il2CppAssembliesDir)/Il2Cppmoon.quantum.forsaken.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Il2Cpp__forsaken">
+      <HintPath>$(Il2CppAssembliesDir)/Il2Cpp__forsaken.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <Target Name="ValidateMelonLoaderReferences" BeforeTargets="ResolveAssemblyReferences">
+    <Error Condition="!Exists('$(MelonLoaderDir)/net6/MelonLoader.dll')" Text="MelonLoader.dll not found at $(MelonLoaderDir)/net6/MelonLoader.dll. Install MelonLoader IL2CPP into GameDir or build with -p:GameDir=&lt;game&gt;." />
+    <Error Condition="!Exists('$(Il2CppAssembliesDir)/UnityEngine.CoreModule.dll')" Text="Unity IL2CPP assemblies not found at $(Il2CppAssembliesDir). Start the game once with MelonLoader installed, or build with -p:GameDir=&lt;game&gt;." />
+  </Target>
+
+</Project>
